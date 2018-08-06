@@ -49,10 +49,10 @@ module.exports.getCity = function(city_id, province_id){
 
 module.exports.getCost = function(origin, destination, weight, courier, callback){
 	if (origin && destination && weight && courier) {
-		var postData = qs.stringify({ origin: '501',
-		  destination: '114',
-		  weight: 1700,
-		  courier: 'jne'
+		var postData = qs.stringify({ origin: origin,
+		  destination: destination,
+		  weight: weight,
+		  courier: courier
 		})
 		var options = {
 		  "method": "POST",
@@ -84,19 +84,10 @@ function postToServer(options, postData, callback){
 
 		res.on("end", function () {
 			var body = Buffer.concat(chunks)
-			// console.log(body.toString())
-			// return body.toString()
-			// console.log(body.toString())
 			return callback(body.toString())
-			// returnData(body.toString())
 		});
 	});
 
 	req.write(postData);
-
-	// function returnData(data){
-	// 	console.log(data)
-	// 	return ""
-	// }
 	req.end();
 }
