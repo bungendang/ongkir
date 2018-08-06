@@ -2,8 +2,6 @@
 var qs = require("querystring");
 var http = require('https')
 
-var secret_key = 'f40003c5de1eacb500f9af7d55a47e01'
-
 var data = require('./services/data.json')
 
 module.exports = function(){
@@ -56,18 +54,17 @@ module.exports.getCost = function(origin, destination, weight, courier, callback
 		})
 		var options = {
 		  "method": "POST",
-		  "hostname": "api.rajaongkir.com",
+		  "hostname": "ongkir-a01d2.appspot.com",
 		  "port": null,
-		  "path": "/basic/cost",
+		  "path": "/cost",
 		  "headers": {
-		    "key": secret_key,
 		    "content-type": "application/x-www-form-urlencoded",
 		    'Content-Length': postData.length
 		  }
 		};
 		postToServer(options, postData, function(response){
 			var jsonRes = JSON.parse(response)
-			callback(jsonRes.rajaongkir)
+			callback(jsonRes)
 		})
 	} else {
 		return "Courier option required"
